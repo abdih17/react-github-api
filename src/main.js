@@ -3,38 +3,60 @@ import faker from 'faker'
 import ReactDom from 'react-dom'
 import cowsay from 'cowsay-browser'
 
+//form container is a component that holds the state for the form inputs
+class GitHubFrom extends React.Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      githubName: ''
+    }
+
+    this.handleChangeOnIputFrom = this.handleChangeOnIputFrom.bind(this);
+  }
+
+  handleChangeOnIputFrom(e){
+    e.preventDefault();
+
+    console.log('THIS************', this);
+    this.setState({ githubName: e.target.value })
+  }
+
+  render(){
+    return (
+      //controlled inputs
+      <form className='form-container'>
+        <input
+        type='text'
+        name='githubName'
+        placeholder='GitHub Search'
+        onChange={ this.handleChangeOnIputFrom }
+        value={ this.state.githubName }
+        />
+      </form>
+    )
+  }
+}
+
 class App extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
-      content: '',
+
     }
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event){
-    event.preventDefault();
-    console.log('********THIS:', this)
-    this.setState({
-      content: cowsay.say({ text: faker.lorem.words(10) })
-    })
   }
 
   render(){
     return (
       <div>
-        <h1>Generate Lorem Cowsay</h1>
-        <button onClick={ this.handleClick }>Click Me!!!</button>
-        <pre> { this.state.content } </pre>
+        <h1>GitHub Form</h1>
+        <GitHubFrom />
       </div>
     )
   }
 }
 
 var container = document.createElement('div');
-console.log('CONTAINER', container);
 var wrapper = document.body.appendChild(container);
-console.log('DOCUMENT', document);
 ReactDom.render(<App />, wrapper);
