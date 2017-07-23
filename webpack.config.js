@@ -11,9 +11,9 @@ module.exports = {
     publicPath: '/'
   },
   plugin: {
-    new HtmlPlugin('${__dirname}/src/index.html'),
+    new HtmlPlugin( template: '${__dirname}/src/index.html'),
     new ExtractPlugin('bundle-[hash].css')
-  },
+  }
   module: {
     rules: {
       test: /\.js$/,
@@ -22,7 +22,7 @@ module.exports = {
     },
     rules: {
       test: /\.scss$/,
-      loader: ExtractPlugin.extract(['sass-loader', 'css-loader'])
+      loader: ExtractPlugin.extract(['sass-laoder', 'css-loader'])
     }
   }
 }
